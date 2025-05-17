@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Clock = () => {
-  const [time, setTime] = useState(new Date().toLocaleTimeString());
-  const [isMultiple, setIsMultiple] = useState(false);
-  const [minutes, setMinutes] = useState(new Date().getMinutes());
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
-      setTime(now.toLocaleTimeString());
-      const mins = now.getMinutes();
-      setMinutes(mins);
-      setIsMultiple(mins % 5 === 0);
+      setTime(now);
     }, 1000);
 
     return () => clearInterval(interval);
@@ -19,8 +14,8 @@ const Clock = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <p>{time}</p>
-      {isMultiple && <p>Время делится на 5</p>}
+      <p>{time.toLocaleString()}</p>
+      {time.getMinutes() % 5 === 0 && <p>Время делится на 5</p>}
     </div>
   );
 };

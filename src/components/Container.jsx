@@ -9,12 +9,12 @@ const Container = () => {
     const [name, setName] = useState(faker.person.firstName())
 
     useEffect(() => {
-      setInterval(() => {
+      const interval = setInterval(() => {
         setName(faker.person.firstName())
-      }, 10000)
-    }, []);
+      }, 2000)
 
-    console.log(name)
+      return () => clearInterval(interval);
+    }, []);
     
     return (
         <div style={{height: '100vh',  width: '100%'}}>
